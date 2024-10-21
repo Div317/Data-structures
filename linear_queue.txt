@@ -1,0 +1,91 @@
+#include<stdio.h>
+#include <stdlib.h>
+#define Max 5
+int queue[Max];
+int front=-1;
+int rear=-1;
+void insert(int item);
+void delete();
+void display();
+void main()
+{
+    int choice, item;
+    while(1) 
+    {
+        printf("\nMENU\n");
+        printf("1. Insert\n");
+        printf("2. Delete\n");
+        printf("3. Display\n");
+        printf("4. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+        switch(choice) 
+        {
+            case 1: 
+                printf("Enter the element to insert: ");
+                scanf("%d", &item);
+                insert(item);
+                break;
+            case 2: 
+                delete();
+                break;
+            case 3: 
+                display();
+                break;
+            case 4: 
+                exit(0);
+            default:
+                printf("Invalid choice\n");
+        }
+    }
+}
+
+void insert(int add_item)
+{
+    if(rear == Max-1)
+    {
+        printf("Queue overflow\n");
+    } 
+    else
+    {
+        if(front == -1) 
+        {
+            front = 0;
+        }
+        rear = rear + 1;
+        queue[rear] = add_item;
+        printf("Inserted %d\n", add_item);
+    }
+}
+
+void delete() 
+{
+    if(front == -1 || front > rear) 
+    {
+        printf("Queue underflow\n");
+        return;
+    } 
+    else 
+    {
+        printf("Deleted item is %d\n", queue[front]);
+        front = front + 1;
+    }
+}
+
+void display()
+{
+    int i;
+    if(front == -1) 
+    {
+        printf("Queue is empty\n");
+    }
+    else 
+    {
+        printf("Queue is: ");
+        for(i = front; i <= rear; i++)
+        {
+            printf("%d ", queue[i]);
+        }
+        printf("\n");
+    }
+}
